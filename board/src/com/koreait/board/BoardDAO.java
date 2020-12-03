@@ -1,0 +1,88 @@
+package com.koreait.board;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class BoardDAO {
+	private List<BoardDTO> list;
+	
+	private static BoardDAO dao;
+	
+//	½Ì±ÛÅæ
+	public static BoardDAO getInstance() {
+		if (dao == null) {
+			dao = new BoardDAO();
+		}
+		return dao;
+	}
+	
+	private BoardDAO() {
+		list = new ArrayList();
+		BoardDTO dto = new BoardDTO();
+		dto.setI_board(1);
+		dto.setTitle("Á¦¸ñ");
+		dto.setCtnt("³»¿ë");
+		dto.setR_dt("11-27");
+		
+		list.add(dto);
+	}
+	
+	public void insBoard(BoardDTO vo) {
+		vo.setI_board(list.size() + 1);
+		list.add(vo);
+	}
+	
+	public List<BoardDTO> selBoardList(){
+		return list;
+	}
+	
+	public BoardDTO selBoard(int i_board) {
+		for(BoardDTO dto : list) {
+			if(dto.getI_board() == i_board) {
+				return dto;
+			}
+		}
+		return null;
+	}
+	
+	public void delBoard(int i_board) {
+		for(BoardDTO dto : list) {
+			if(dto.getI_board() == i_board) {
+				list.remove(dto);
+				return;
+			}
+		}
+	}
+	
+	public void modBoard(BoardDTO param) {
+		for(BoardDTO dto : list) {
+			if(dto.getI_board() == param.getI_board()) {
+				dto.setTitle(param.getTitle());
+				dto.setCtnt(param.getCtnt());
+			}
+		}
+	}
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
